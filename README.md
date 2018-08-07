@@ -25,7 +25,7 @@
   ```
   nix-build -A connectScripts.mainnetWallet -o connect-to-mainnet
   ```
-* 最后在cardano-sl目录下，会有可执行文件connect-to-mainnet，通过`./connect-to-mainnet`连接到主网,如果运行出现yaml exception，说明配置文件路径不对，进入connetc-to-mainnet可执行文件，按照下图修改配置文件路径：
+* 最后在cardano-sl目录下，会有可执行文件connect-to-mainnet，通过`./connect-to-mainnet`连接到主网,如果运行出现yaml exception，说明配置文件路径不对，进入编辑connetc-to-mainnet可执行文件，按照下图修改配置文件路径：
   
   
 
