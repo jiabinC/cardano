@@ -1,4 +1,4 @@
-##如何从源码构建连到cardano主网的可执行文件 connect-to-mainnet
+## 如何从源码构建连到cardano主网的可执行文件 connect-to-mainnet
 
 * cardano 源码github下载 [cardano-sl]( https://github.com/input-output-hk/cardano-sl.git)
 
