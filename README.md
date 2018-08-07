@@ -1,4 +1,4 @@
-# 如何从源码构建连到cardano主网的可执行文件 connect-to-mainnet
+##如何从源码构建连到cardano主网的可执行文件 connect-to-mainnet
 
 * cardano 源码github下载 [cardano-sl]( https://github.com/input-output-hk/cardano-sl.git)
 
@@ -54,6 +54,8 @@
      $ npm run dev
      ```
      上面的命令其实执行的是package.json里面设置的一些命令（scripts），在package.json中script被定义为dev，可通过上述命令运行
+     
+     ![](https://github.com/jiabinC/cardano/blob/master/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20180807104410.png)
      
   
   
