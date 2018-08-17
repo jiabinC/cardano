@@ -21,6 +21,10 @@
   binary-caches            = https://cache.nixos.org https://hydra.iohk.io
   binary-cache-public-keys = hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=
   ```
+* 构造可执行文件 cardano-node-master
+  ```
+  nix-build -A cardano-sl-static --cores 0 --max-jobs 2 --no-build-output --out-link master
+  ```
 * 使用`git checkout master`切换到master分支，然后构建可执行文件
   ```
   nix-build -A connectScripts.mainnetWallet -o connect-to-mainnet
