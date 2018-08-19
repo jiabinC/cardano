@@ -53,25 +53,25 @@
 * relay节点与core节点启动用到的可执行文件是相同的，都为cardano-node-simple，用到的配置文件也可以相同，缺少` --genesis-secret $i  `参数
   
 ### wallet node的启动，并连接到上述网络,使用的是可执行文件cardano-node
-    ```
-      exec /nix/store/hwhrw5q3gx2a132az89gq17yypzrdznw-cardano-sl-wallet-new-static-1.3.0/bin/cardano-node                                     \
-      --configuration-file /nix/store/ygdlx8j6jbpf0cp7v6y1a0fb8rnqjqm9-cardano-sl-config/lib/configuration.yaml --configuration-key dev                                           \
-     --tlscert ./state-demo/tls/server/server.crt     \                       //wallet node 的tls公钥证书
-     --tlskey ./state-demo/tls/server/server.key      \                       //wallet node 的私钥
-     --tlsca ./state-demo/tls/server/ca.crt           \                       //ca的公钥证书
-     --log-config /nix/store/ygdlx8j6jbpf0cp7v6y1a0fb8rnqjqm9-cardano-sl-config/log-configs/connect-to-cluster.yaml \
-     --topology "/nix/store/n7wkmk8y11n9q40903a1kj7xqr4rsd74-wallet-topology.yaml" \     //此配置文件定义wallet node连接到哪个 relay node
-     --logs-prefix "./state-demo/logs"                               \
-     --db-path "./state-demo/db"                       \
-     --wallet-db-path './state-demo/wallet-db'        \
-                                       \
-     --no-client-auth                     \
-     --keyfile ./state-demo/secret.key                               \
-     --wallet-address localhost:8090               \
-     --wallet-doc-address localhost:8091        \
-     --ekg-server localhost:8000 --metrics                             \
-      +RTS -N2 -qg -A1m -I0 -T -RTS   
-    ```
+      ```
+        exec /nix/store/hwhrw5q3gx2a132az89gq17yypzrdznw-cardano-sl-wallet-new-static-1.3.0/bin/cardano-node                                     \
+        --configuration-file /nix/store/ygdlx8j6jbpf0cp7v6y1a0fb8rnqjqm9-cardano-sl-config/lib/configuration.yaml --configuration-key dev                                           \
+       --tlscert ./state-demo/tls/server/server.crt     \                       //wallet node 的tls公钥证书
+       --tlskey ./state-demo/tls/server/server.key      \                       //wallet node 的私钥
+       --tlsca ./state-demo/tls/server/ca.crt           \                       //ca的公钥证书
+       --log-config /nix/store/ygdlx8j6jbpf0cp7v6y1a0fb8rnqjqm9-cardano-sl-config/log-configs/connect-to-cluster.yaml \
+       --topology "/nix/store/n7wkmk8y11n9q40903a1kj7xqr4rsd74-wallet-topology.yaml" \     //此配置文件定义wallet node连接到哪个 relay node
+       --logs-prefix "./state-demo/logs"                               \
+       --db-path "./state-demo/db"                       \
+       --wallet-db-path './state-demo/wallet-db'        \
+                                         \
+       --no-client-auth                     \
+       --keyfile ./state-demo/secret.key                               \
+       --wallet-address localhost:8090               \
+       --wallet-doc-address localhost:8091        \
+       --ekg-server localhost:8000 --metrics                             \
+        +RTS -N2 -qg -A1m -I0 -T -RTS   
+      ```
 
  ### import HD keys/wallet 
   
