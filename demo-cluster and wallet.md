@@ -17,7 +17,7 @@
   --configuration-key default
   ```
   
- # 核心节点与中继节点的启动
+ ### 核心节点与中继节点的启动
 
 * `cardano`提供了cordano-node可执行文件，cordano-node-simple可执行文件，后者用于启动一个wallet node
 
@@ -41,15 +41,66 @@
   --configuration-file $config_files/configuration.yaml     //配置文件的路径，默认为项目目录下的 /lib/configuration.yaml
   --configuration-key default                               //specifies key in this configuration. Default value is default.
   ```
-  | 其中网络拓扑配置文件内容如下：
+   其中网络拓扑配置文件内容如下,格式为json文件，定义了网络的4个core节点和1个relay节点，确定了网络节点的关系。
   ```
     {"nodes":
-    {"core1":{"addr":"127.0.0.1","port":3001,"region":"undefined","static-routes":[["core2"],["core3"],["core4"],                            ["relay1"]],"type":"core"},
-  "core2":{"addr":"127.0.0.1","port":3002,"region":"undefined","static-routes":[["core1"],["core3"],["core4"],                                ["relay1"]] ,"type":"core"},
-  "core3":{"addr":"127.0.0.1","port":3003,"region":"undefined","static-routes":[["core1"],["core2"],["core4"],                                ["relay1"]],"type":"core"},
-  "core4":{"addr":"127.0.0.1","port":3004,"region":"undefined","static-routes":[["core1"],["core2"],["core3"],                                ["relay1"]],"type":"core"},
-  "relay1":{"addr":"127.0.0.1","port":3101,"region":"undefined","static-routes":[["core1"],["core2"],["core3"],                              ["core4"]],"type":"relay"}}}
+    {"core1":{"addr":"127.0.0.1","port":3001,"region":"undefined","static-routes":[["core2"],["core3"],["core4"],                                ["relay1"]],"type":"core"},
+     "core2":{"addr":"127.0.0.1","port":3002,"region":"undefined","static-routes":[["core1"],["core3"],["core4"],                                ["relay1"]] ,"type":"core"},
+     "core3":{"addr":"127.0.0.1","port":3003,"region":"undefined","static-routes":[["core1"],["core2"],["core4"],                                ["relay1"]],"type":"core"},
+     "core4":{"addr":"127.0.0.1","port":3004,"region":"undefined","static-routes":[["core1"],["core2"],["core3"],                                ["relay1"]],"type":"core"},
+     "relay1":{"addr":"127.0.0.1","port":3101,"region":"undefined","static-routes":[["core1"],["core2"],["core3"],                                ["core4"]],"type":"relay"}}}
+  ```
+  * relay节点与core节点启动用到的可执行文件是相同的，都为cardano-node-simple，用到的配置文件也可以相同，缺少` --genesis-secret $i  `参数
   
+  ### wallet node的启动，并连接到上述网络,使用的是可执行文件cardano-node
+  ```
+    exec /nix/store/hwhrw5q3gx2a132az89gq17yypzrdznw-cardano-sl-wallet-new-static-1.3.0/bin/cardano-node                                     \
+    --configuration-file /nix/store/ygdlx8j6jbpf0cp7v6y1a0fb8rnqjqm9-cardano-sl-config/lib/configuration.yaml --configuration-key dev                                           \
+   --tlscert ./state-demo/tls/server/server.crt     \                       //wallet node 的tls公钥证书
+   --tlskey ./state-demo/tls/server/server.key      \                       //wallet node 的私钥
+   --tlsca ./state-demo/tls/server/ca.crt           \                       //ca的公钥证书
+   --log-config /nix/store/ygdlx8j6jbpf0cp7v6y1a0fb8rnqjqm9-cardano-sl-config/log-configs/connect-to-cluster.yaml \
+   --topology "/nix/store/n7wkmk8y11n9q40903a1kj7xqr4rsd74-wallet-topology.yaml" \     //此配置文件定义wallet node连接到哪个 relay node
+   --logs-prefix "./state-demo/logs"                               \
+   --db-path "./state-demo/db"                       \
+   --wallet-db-path './state-demo/wallet-db'        \
+                                     \
+   --no-client-auth                     \
+   --keyfile ./state-demo/secret.key                               \
+   --wallet-address localhost:8090               \
+   --wallet-doc-address localhost:8091        \
+   --ekg-server localhost:8000 --metrics                             \
+    +RTS -N2 -qg -A1m -I0 -T -RTS   
   ```
 
+ ### import HD keys/wallet 
+  
+   * 在core节点启动时，生成了genesis-secret，里面初始化了一些钱包的地址及余额等信息，位于genesis-keys目录中，我们可以通过curl http请求将其导入wallet node中
+   
+    ```
+     curl https://localhost:8090/api/wallets/keys \ 
+      --cacert ./state-demo/tls/client/ca.crt \                         //提供ca的公钥证书
+      --cert ./state-demo/tls/client/client.pem \                       //tls双向验证，提供客户端的证书和私钥
+      -X POST \                                                         // http method 为POST
+      -H 'cache-control: no-cache' \                    
+      -H 'content-type: application/json' \         
+      -d "\"./state-demo/genesis-keys/generated-keys/poor/key$i.sk\"" | jq .       // 指定创始区块的.sk文件
+    ```
+ 
+### 启动wallet ui客户端
+     
+  * 在daedalus项目根目录下，在安装了yarn和npm、npm的基础上，运行yarn install，进行客户端相关js模块的安装
+     
+  * 进行tls配置
+     
+      ```
+       export CARDANO_TLS_PATH="path-tls-file"   //指定tls的路径，这里为path-to-cardano/state-demo/tls/server,指定连接到的wallet的地址
+       export NETWORK="   "                      //可为mainnet，testnet，默认为dev，这里为默认
+      ```
+  * 启动钱包客户端
+     
+     ```
+       yarn run dev(start)
+     ```
+    
   
