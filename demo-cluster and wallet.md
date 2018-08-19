@@ -52,7 +52,7 @@
   ```
 * relay节点与core节点启动用到的可执行文件是相同的，都为cardano-node-simple，用到的配置文件也可以相同，缺少` --genesis-secret $i  `参数
   
-  ### wallet node的启动，并连接到上述网络,使用的是可执行文件cardano-node
+### wallet node的启动，并连接到上述网络,使用的是可执行文件cardano-node
     ```
       exec /nix/store/hwhrw5q3gx2a132az89gq17yypzrdznw-cardano-sl-wallet-new-static-1.3.0/bin/cardano-node                                     \
       --configuration-file /nix/store/ygdlx8j6jbpf0cp7v6y1a0fb8rnqjqm9-cardano-sl-config/lib/configuration.yaml --configuration-key dev                                           \
