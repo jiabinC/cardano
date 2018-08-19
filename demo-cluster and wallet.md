@@ -41,7 +41,7 @@
   --configuration-file $config_files/configuration.yaml     //配置文件的路径，默认为项目目录下的 /lib/configuration.yaml
   --configuration-key default                               //specifies key in this configuration. Default value is default.
   ```
-  * 其中网络拓扑配置文件内容如下,格式为json文件，定义了网络的4个core节点和1个relay节点，确定了网络节点的关系。
+* 其中网络拓扑配置文件内容如下,格式为json文件，定义了网络的4个core节点和1个relay节点，确定了网络节点的关系。
   ```
     {"nodes":
     {"core1":{"addr":"127.0.0.1","port":3001,"region":"undefined","static-routes":[["core2"],["core3"],["core4"],                                ["relay1"]],"type":"core"},
@@ -50,7 +50,7 @@
      "core4":{"addr":"127.0.0.1","port":3004,"region":"undefined","static-routes":[["core1"],["core2"],["core3"],                                ["relay1"]],"type":"core"},
      "relay1":{"addr":"127.0.0.1","port":3101,"region":"undefined","static-routes":[["core1"],["core2"],["core3"],                                ["core4"]],"type":"relay"}}}
   ```
-  * relay节点与core节点启动用到的可执行文件是相同的，都为cardano-node-simple，用到的配置文件也可以相同，缺少` --genesis-secret $i  `参数
+* relay节点与core节点启动用到的可执行文件是相同的，都为cardano-node-simple，用到的配置文件也可以相同，缺少` --genesis-secret $i  `参数
   
   ### wallet node的启动，并连接到上述网络,使用的是可执行文件cardano-node
     ```
