@@ -76,16 +76,16 @@
  ### import HD keys/wallet 
   
    * 在core节点启动时，生成了genesis-secret，里面初始化了一些钱包的地址及余额等信息，位于genesis-keys目录中，我们可以通过curl http请求将其导入wallet node中
-   
-    ```
-     curl https://localhost:8090/api/wallets/keys \ 
-      --cacert ./state-demo/tls/client/ca.crt \                         //提供ca的公钥证书
-      --cert ./state-demo/tls/client/client.pem \                       //tls双向验证，提供客户端的证书和私钥
-      -X POST \                                                         // http method 为POST
-      -H 'cache-control: no-cache' \                    
-      -H 'content-type: application/json' \         
-      -d "\"./state-demo/genesis-keys/generated-keys/poor/key$i.sk\"" | jq .       // 指定创始区块的.sk文件
-    ```
+
+      ```
+       curl https://localhost:8090/api/wallets/keys \ 
+        --cacert ./state-demo/tls/client/ca.crt \                         //提供ca的公钥证书
+        --cert ./state-demo/tls/client/client.pem \                       //tls双向验证，提供客户端的证书和私钥
+        -X POST \                                                         // http method 为POST
+        -H 'cache-control: no-cache' \                    
+        -H 'content-type: application/json' \         
+        -d "\"./state-demo/genesis-keys/generated-keys/poor/key$i.sk\"" | jq .       // 指定创始区块的.sk文件
+      ```
  
 ### 启动wallet ui客户端
      
