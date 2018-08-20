@@ -35,9 +35,8 @@
 
   ```
   --db-path ./state-demo/core-db$i                  //指定节点数据库的生成路径
-  --genesis-secret $i                               //生成创世块secret数据
-  --rebuild-db                                      //如果节点的数据库目录已经存在，则丢弃它内容并从头开始创建一个新的。
-  --genesis-secret $i                  
+  --genesis-secret $i                               // Used genesis secret key index.
+  --rebuild-db                                      //如果节点的数据库目录已经存在，则丢弃它内容并从头开始创建一个新的。               
   --listen 127.0.0.1:$((3000 + i))                  //节点启动的IP和port
   --json-log ./state-demo/logs/core$i.json          //json格式的日志文件
   --logs-prefix ./state-demo/logs 
