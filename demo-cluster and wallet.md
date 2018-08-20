@@ -1,5 +1,7 @@
 # 如何部署本地的节点测试网络，使钱包连接到本地网络，并进行转账测试
 
+[可执行文件命令行参数](https://cardanodocs.com/technical/cli-options/)
+
 ### cardano网络可以分为三类节点，核心节点、中继节点、钱包节点（客户端节点）
 
 * 首先一个节点网络需要一个启动时间，定义启动时间为 `system_start=$((`date +%s` + 15))`，并创建demo-cluster的目录
@@ -15,6 +17,10 @@
   --genesis-out-dir ./state-demo/genesis-keys 
   --configuration-file    $config_files/configuration.yaml 
   --configuration-key default
+  
+  //generate-keys-by-spec          Generate secret keys and avvm seed by genesis-spec.yaml
+  
+  
   ```
   
  ### 核心节点与中继节点的启动
@@ -30,13 +36,14 @@
   ```
   --db-path ./state-demo/core-db$i                  //指定节点数据库的生成路径
   --genesis-secret $i                               //生成创世块secret数据
-  --rebuild-db --genesis-secret $i 
+  --rebuild-db                                      //如果节点的数据库目录已经存在，则丢弃它内容并从头开始创建一个新的。
+  --genesis-secret $i                  
   --listen 127.0.0.1:$((3000 + i))                  //节点启动的IP和port
   --json-log ./state-demo/logs/core$i.json          //json格式的日志文件
   --logs-prefix ./state-demo/logs 
-  --system-start $system_start                      //将系统启动时间指定为unix时间戳，以秒为单位。 如果配置中没有它，则必须提供，否则不得提供。
+  --system-start $system_start             //Unix Epoch以来的秒数。将系统启动时间指定为unix时间戳，以秒为单位。如果配置中没有它，则必须提供，否则不得提供。
   --metrics +RTS -N2 -qg -A1m -I0 -T -RTS 
-  --node-id core$i 
+  --node-id core$i                                  //网络中此节点的标识符
   --topology /nix/store/bipfcjmkq0pp90fd9dng4ayygq92c19k-topology.yaml   //配置cardano-sl的网络拓扑配置文件
   --configuration-file $config_files/configuration.yaml     //配置文件的路径，默认为项目目录下的 /lib/configuration.yaml
   --configuration-key default                               //specifies key in this configuration. Default value is default.
@@ -66,11 +73,11 @@
        --wallet-db-path './state-demo/wallet-db'        \
                                          \
        --no-client-auth                     \
-       --keyfile ./state-demo/secret.key                               \
-       --wallet-address localhost:8090               \
+       --keyfile ./state-demo/secret.key                               //Path to file with secret key (we use it for Daedalus).
+       --wallet-address localhost:8090               \                 // Path to the wallet's database.
        --wallet-doc-address localhost:8091        \
-       --ekg-server localhost:8000 --metrics                             \
-        +RTS -N2 -qg -A1m -I0 -T -RTS   
+       --ekg-server localhost:8000                                       //Host and port for the EKG server
+       --metrics  +RTS -N2 -qg -A1m -I0 -T -RTS                         //Enable metrics (EKG, statsd)
       ```
 
  ### import HD keys/wallet 
