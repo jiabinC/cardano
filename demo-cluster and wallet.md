@@ -4,7 +4,7 @@
 
 #### 生成launch_demo_cluster 可执行文件
   ```
-  nix-build -A demoClusterDaedalusDev -o launch_demo_cluster
+  $ nix-build -A demoClusterDaedalusDev -o launch_demo_cluster
 
   1. To launch cluster, run ./launch_demo_cluster
   2. To stop, hit ctrl-c and it will terminate all the nodes.
@@ -20,13 +20,13 @@
 * 首先一个节点网络需要一个启动时间，定义启动时间为 `system_start=$((`date +%s` + 15))`，并创建demo-cluster的目录
   ```
   # Remove previous state
-  rm -rf ./state-demo
-  mkdir -p ./state-demo/logs
+  $ rm -rf ./state-demo
+  $ mkdir -p ./state-demo/logs
   ```
 
 * 利用cardano-sl提供的静态工具`cardano-keygen`,这个命令将生成创始区块的secrets并转存到目录中
   ```
-  cardano-keygen --system-start 0 generate-keys-by-spec 
+  $ cardano-keygen --system-start 0 generate-keys-by-spec 
   --genesis-out-dir ./state-demo/genesis-keys 
   --configuration-file    $config_files/configuration.yaml 
   --configuration-key default
