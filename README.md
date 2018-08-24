@@ -23,7 +23,7 @@
   ```
 * 构造可执行文件 cardano-node-master
   ```
-  nix-build -A cardano-sl-static --cores 0 --max-jobs 2 --no-build-output --out-link master
+  nix-build -A cardano-sl-node-static --cores 0 --max-jobs 2 --no-build-output --out-link master
   ```
 * 使用`git checkout master`切换到master分支，然后构建可执行文件
   ```
@@ -42,7 +42,7 @@
      $ cd daedalus
      ```
 
-  2. 首先安装nodejs 与 npm
+  2. 首先安装nodejs(8.0.0) 与 npm(yarn)
      ```
      $ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash  //安装npm的版本管理器 
      $ sudo nvm install x.y.z                         // x,y,z 为node版本号，此命令来安装node与npm
@@ -51,11 +51,11 @@
      ```
   3. daedalus 目录下有package.json，它是一个模块的配置文件，在项目目录下使用下面的命令来安装模块，安装的模块将位于node_modules目录下：
      ```
-     $ npm install
+     $ npm install(yarn install)
      ```
   4. 在connect-to-mainnet脚本运行的前提下，通过下面的命令来运行钱包应用
      ```
-     $ npm run dev
+     $ npm run dev（yarn run dev)
      ```
      上面的命令其实执行的是package.json里面设置的一些命令（scripts），在package.json中script被定义为dev，可通过上述命令运行
      
