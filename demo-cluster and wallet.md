@@ -112,7 +112,7 @@
         -d "\"./state-demo/genesis-keys/generated-keys/poor/key$i.sk\"" | jq .       // 指定创始区块的.sk文件
       ```
  
-### 启动wallet ui客户端
+### 启动wallet ui客户端（node 8.0.0）
      
   * 在daedalus项目根目录下，在安装了yarn和npm、npm的基础上，运行yarn install，进行客户端相关js模块的安装
      
