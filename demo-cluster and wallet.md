@@ -98,7 +98,6 @@
      ```
         {"wallet":{"fallbacks":1,"relays":[[{"addr":"relay-ip","port":relay-port}]],"valency":1}}
      ```
-
  ### import HD keys/wallet 
   
    * 在core节点启动时，生成了genesis-secret，里面初始化了一些钱包的地址及余额等信息，位于genesis-keys目录中，我们可以通过curl http请求将其导入wallet node中
