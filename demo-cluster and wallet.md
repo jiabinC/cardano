@@ -72,6 +72,9 @@
 * relay节点与core节点启动用到的可执行文件是相同的，都为cardano-node-simple，用到的配置文件也可以相同，缺少` --genesis-secret $i  `参数
   
 ### wallet node的启动，并连接到上述网络,使用的是可执行文件cardano-node
+
+   * wallet节点启动的参数配置
+   
       ```
         exec /nix/store/hwhrw5q3gx2a132az89gq17yypzrdznw-cardano-sl-wallet-new-static-1.3.0/bin/cardano-node                                     \
         --configuration-file /nix/store/ygdlx8j6jbpf0cp7v6y1a0fb8rnqjqm9-cardano-sl-config/lib/configuration.yaml --configuration-key dev                                           \
@@ -91,6 +94,10 @@
        --ekg-server localhost:8000                                       //Host and port for the EKG server
        --metrics  +RTS -N2 -qg -A1m -I0 -T -RTS                         //Enable metrics (EKG, statsd)
       ```
+   * wallet node的网络拓扑配置，在--topology参数中进行配置，wallet node需要连接到relay mode，如下
+     ```
+        {"wallet":{"fallbacks":1,"relays":[[{"addr":"relay-ip","port":relay-port}]],"valency":1}}
+     ```
 
  ### import HD keys/wallet 
   
