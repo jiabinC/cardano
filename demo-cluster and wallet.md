@@ -1,8 +1,8 @@
 ## 如何部署本地的节点测试网络，使钱包连接到本地网络，并进行转账测试
 
-[可执行文件命令行参数](https://cardanodocs.com/technical/cli-options/)
-[Genesis data](https://github.com/input-output-hk/cardano-sl/blob/master/docs/configuration.md#system-start-time)
-[balance and stake](https://cardanodocs.com/cardano/balance-and-stake/)
+* [可执行文件命令行参数](https://cardanodocs.com/technical/cli-options/)
+* [Genesis data](https://github.com/input-output-hk/cardano-sl/blob/master/docs/configuration.md#system-start-time)
+* [balance and stake](https://cardanodocs.com/cardano/balance-and-stake/)
 
 #### 生成launch_demo_cluster 可执行文件
   ```
