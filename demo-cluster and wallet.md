@@ -2,8 +2,21 @@
 
 [可执行文件命令行参数](https://cardanodocs.com/technical/cli-options/)
 
-### cardano网络可以分为三类节点，核心节点、中继节点、钱包节点（客户端节点）
+#### 生成launch_demo_cluster 可执行文件
+  ```
+  nix-build -A demoClusterDaedalusDev -o launch_demo_cluster
 
+  1. To launch cluster, run ./launch_demo_cluster
+  2. To stop, hit ctrl-c and it will terminate all the nodes.
+  3. A state-demo state folder will be automatically created relative to your current working directory.
+  4. Logs will be found in state-demo/logs
+  5. TLS certs/keys will be found in state-demo/tls
+  6 .11 genesis wallets will be pre-loaded with 37 million Ada each
+  7. start deadalus 
+ ```
+
+### cardano网络可以分为三类节点，核心节点、中继节点、钱包节点（客户端节点）
+#### 所有节点system_start参数必须相同，
 * 首先一个节点网络需要一个启动时间，定义启动时间为 `system_start=$((`date +%s` + 15))`，并创建demo-cluster的目录
   ```
   # Remove previous state
@@ -25,7 +38,7 @@
   
  ### 核心节点与中继节点的启动
 
-* `cardano`提供了cordano-node可执行文件，cordano-node-simple可执行文件，后者用于启动一个wallet node
+* `cardano`提供了cordano-node可执行文件，cordano-node-simple可执行文件，前者用于启动一个wallet node
 
 
 
