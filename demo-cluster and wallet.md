@@ -116,7 +116,7 @@
  
 ### 启动wallet ui客户端（node 8.0.0）
      
-  * 在daedalus项目根目录下，在安装了yarn和npm、npm的基础上，运行yarn install，进行客户端相关js模块的安装
+  * 在daedalus项目根目录下，在安装了yarn和npm、npm的基础上，运行` yarn install` ，进行客户端相关js模块的安装
      
   * 进行tls配置
      
